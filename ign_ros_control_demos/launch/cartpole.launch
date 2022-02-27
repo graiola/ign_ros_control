@@ -11,6 +11,7 @@
 
         <!-- send robot urdf to param server -->
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ign_ros_control_demos)/urdf/cartpole.urdf.xacro' controller:=$(arg controller)"/>
+        <param name="robot_semantic_description" command="$(find xacro)/xacro --inorder '$(find ign_ros_control_demos)/urdf/cartpole.srdf.xacro'"/>
 
         <node
           pkg="ros_ign_gazebo"

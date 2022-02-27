@@ -29,6 +29,15 @@
       <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
     </inertial>
   </link>
+
+  <joint name="imu_joint" type="fixed">
+      <parent link="cart"/>
+      <child link="cart_imu"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <link name="cart_imu">
+  </link>
+
   <joint name="world_to_base" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 1"/>
     <parent link="world"/>
@@ -61,11 +70,21 @@
         <specular>0 0 0.8 1</specular>
       </material>
     </visual>
+    <sensor name="cart_imu" type="imu">
+        <always_on>1</always_on>
+        <update_rate>500</update_rate>
+        <visualize>true</visualize>
+        <topic>imu</topic>
+    </sensor>
   </gazebo>
 
   <gazebo>
     <plugin filename="ign_ros_control_plugin" name="ign_ros_control::IgnitionROSControlPlugin">
         <updateRate>1000</updateRate>
+        <robotSimType>wolf_ign_interface/WolfRobotHwIgn</robotSimType>
+    </plugin>
+    <plugin filename="libignition-gazebo-imu-system.so"
+            name="ignition::gazebo::systems::Imu">
     </plugin>
   </gazebo>
 
