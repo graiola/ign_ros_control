@@ -157,9 +157,9 @@ bool IgnitionSystem::initSim(ros::NodeHandle model_nh,
     ROS_INFO_STREAM("[Ignition ROS Control] Loading joint: " << joint_name);
 
     // Add data from transmission
-    this->dataPtr->joints_[j].joint_position     = 0.0;
+    this->dataPtr->joints_[j].joint_position     = 1.0;
     this->dataPtr->joints_[j].joint_velocity     = 0.0;
-    this->dataPtr->joints_[j].joint_effort       = 0.0;  // N/m for continuous joints
+    this->dataPtr->joints_[j].joint_effort       = 1.0;  // N/m for continuous joints
     this->dataPtr->joints_[j].joint_effort_cmd   = 0.0;
     this->dataPtr->joints_[j].joint_position_cmd = 0.0;
     this->dataPtr->joints_[j].joint_velocity_cmd = 0.0;
@@ -266,7 +266,7 @@ void IgnitionSystem::read()
 
     this->dataPtr->joints_[i].joint_position = jointPositions->Data()[0];
     this->dataPtr->joints_[i].joint_velocity = jointVelocity->Data()[0];
-    //this->dataPtr->joints_[i].joint_effort   = jointForce->Data()[0];
+    this->dataPtr->joints_[i].joint_effort   = this->dataPtr->joints_[i].joint_effort_cmd;
   }
 }
 
